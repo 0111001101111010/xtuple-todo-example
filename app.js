@@ -21,7 +21,7 @@ app.get('/', function (req, res){
         }
         if (result) {
           app.locals.todos = result.data.data;
-          res.render("index");
+          res.render("old");
         }
       }
     });
