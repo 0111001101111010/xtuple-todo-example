@@ -29,6 +29,25 @@ app.get('/', function (req, res){
   });
 });
 
+app.get('/test', function (req, res){
+  new Client(function (client) {
+    client.query({
+      type: 'ToDo',
+      method: 'list',
+      params: { maxResults: 50 },
+      callback: function (err, result) {
+        if (err) {
+          res.send('Error:', err);
+        }
+        if (result) {
+          app.locals.todos = result.data.data;
+          res.render("index");
+        }
+      }
+    });
+  });
+});
+
 app.get("/add_todo", function (req, res){
   new Client(function (client) {
     client.query({
